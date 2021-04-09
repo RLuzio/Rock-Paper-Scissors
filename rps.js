@@ -13,9 +13,17 @@ app.get("/", function(req,resp) {
 });
 
 app.post("/game", function(req, res) {
-
+	'use strict'
 	console.log("Player Choice: " + req.body.choice);
 
+	let compChoices = ["rock", "paper", "scissors"];
+
+	let num = Math.floor((Math.random() * 3) + 0);
+	console.log("Number: " + num);
+
+	let computerChoice = compChoices[num];
+
+	console.log("Computer Choice: " + computerChoice);
 });
 
 app.listen(3000);
