@@ -22,8 +22,40 @@ app.post("/game", function(req, res) {
 	console.log("Number: " + num);
 
 	let computerChoice = compChoices[num];
+	console.log("Computer Choice:"   + computerChoice);
+	let  userChoice = req.body.choice;
+	
+	if (userChoice ===  computerChoice)  {
+		console.log("Tied");
+	}
+	
+	else if (userChoice === 'paper') { 
+		if (computerChoice === 'scissors') {
+			console.log("You LOST");
+		}
+		else if (computerChoice === 'rock') {
+			console.log("YOU WON");
+		}
+	}
+	else if (userChoice === 'rock') { 
+		if (computerChoice === 'scissors') {
+			console.log("You WIN");
+		}
+		else if (computerChoice === 'paper') {
+			console.log("YOU LOST");
+		}
+	}
+	else if (userChoice === 'scissors') { 
+		if (computerChoice === 'rock') {
+			console.log("You LOST")
+		}
+		else if (computerChoice === 'paper') {
+			console.log("YOU WIN");
+		}
+	}
+	
+	
 
-	console.log("Computer Choice: " + computerChoice);
 });
 
 app.listen(3000);
