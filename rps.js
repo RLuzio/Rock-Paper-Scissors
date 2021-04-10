@@ -15,7 +15,10 @@ app.get("/", function(req,resp) {
 app.post("/game", function(req, res) {
 	'use strict'
 	console.log("Player Choice: " + req.body.choice);
-
+	let userScore = 0;
+	let totalGames = 0;
+	let computerScore = 0;
+	let winOrLose = "Temp";
 	let compChoices = ["rock", "paper", "scissors"];
 
 	let num = Math.floor((Math.random() * 3) + 0);
@@ -31,31 +34,41 @@ app.post("/game", function(req, res) {
 	
 	else if (userChoice === 'paper') { 
 		if (computerChoice === 'scissors') {
-			console.log("You LOST");
+			computerScore += 1;
+			winOrLose = "You Lost";
+			
 		}
 		else if (computerChoice === 'rock') {
-			console.log("YOU WON");
+			userScore += 1;
+			winOrLose = "You Win!";
 		}
 	}
 	else if (userChoice === 'rock') { 
 		if (computerChoice === 'scissors') {
-			console.log("You WIN");
+			userScore += 1;
+			winOrLose = "You Win!";
 		}
 		else if (computerChoice === 'paper') {
-			console.log("YOU LOST");
+			computerScore += 1;
+			winOrLose = "You Lost";
 		}
 	}
 	else if (userChoice === 'scissors') { 
 		if (computerChoice === 'rock') {
-			console.log("You LOST")
+			computerScore += 1;
+			winOrLose = "You Lost";
 		}
 		else if (computerChoice === 'paper') {
-			console.log("YOU WIN");
+			userScore += 1;
+			winOrLose = "You Win!";
 		}
 	}
 	
-	
-
+	totalGames += 1;
+  	res.render(__dirname + "/rps.html", {userScore:userScore});
+	res.render(__dirname + "/rps.html", {totalGames:totalGames});
+	res.render(__dirname + "/rps.html", {computerScore:computerScore});
+	res.render(__dirname + "/rps.html", {winOrLose:winOrLose});
 });
 
 app.listen(3000);
